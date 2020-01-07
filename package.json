@@ -1,0 +1,25 @@
+{
+  "name": "movie-mongo-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vbalte/movie-mongo-API.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vbalte/movie-mongo-API/issues"
+  },
+  "homepage": "https://github.com/vbalte/movie-mongo-API#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongodb": "^3.4.1",
+    "mongoose": "^5.8.5",
+    "nodeman": "^1.1.2"
+  }
+}
