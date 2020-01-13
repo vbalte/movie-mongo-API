@@ -53,9 +53,9 @@ router.patch("/movies/:id", async (req, res) => {
   }
 });
 
-router.get("/movies/title", async (req, res) => {
+router.get("/movies/:title", async (req, res) => {
   try {
-    let movie = await Movie.findById(req.params.title);
+    let movie = await Movie.find(req.params.title);
     res.send(movie);
   } catch (error) {
     res.status(500).send(error);

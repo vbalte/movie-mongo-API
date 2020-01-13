@@ -1,7 +1,8 @@
 const mongoose = require("mongoose");
 const Movie = mongoose.model("movie", {
   title: {
-    type: String
+    type: String,
+    required: true
   },
   year: {
     type: Number
