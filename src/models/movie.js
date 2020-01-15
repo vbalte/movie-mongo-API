@@ -5,10 +5,12 @@ const Movie = mongoose.model("movie", {
     required: true
   },
   year: {
-    type: Number
+    type: Number,
+    required: true
   },
   genre: {
-    type: String
+    type: String,
+    required: true
   }
 });
 

@@ -20,7 +20,6 @@ router.get("/movies", async (req, res) => {
     res.status(500).send(error);
   }
 });
-
 router.get("/movies/:id", async (req, res) => {
   try {
     let movie = await Movie.findById(req.params.id);
@@ -49,17 +48,7 @@ router.patch("/movies/:id", async (req, res) => {
     const movie = await Movie.findByIdAndUpdate(req.params.id, req.body);
     res.send(movie);
   } catch (error) {
-    res.status();
-  }
-});
-
-router.get("/movies/:title", async (req, res) => {
-  try {
-    let movie = await Movie.find(req.params.title);
-    res.send(movie);
-  } catch (error) {
     res.status(500).send(error);
   }
 });
-
 module.exports = router;
