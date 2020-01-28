@@ -7,11 +7,38 @@ router.post("/users", async (req, res) => {
   try {
     const user = new User(req.body);
     await user.save();
-    const token = await user.generateToken(); //lowercase so that token is generated for only this user
+    const token = await user.generateToken(); //lowercase so that token is generated for ONLY this user
     res.send({ user, token });
   } catch (e) {
     console.log(e);
     res.status(400).send(e);
+  }
+});
+router.post("/users/login", async (req, res) => {
+  try {
+    const user = await User.findByCredentials(
+      req.body.email,
+      req.body.password
+    );
+    const token = await user.generateToken();
+
+    res.send({ user, token });
+  } catch (error) {
+    console.log(error);
+    res.status(400).send(error);
+  }
+});
+
+router.post("/users/logout", auth, async (req, res) => {
+  try {
+    req.user.tokens = req.user.tokens.filter(token => {
+      return token.token !== req.token;
+      //we ONLY return the tokens that do not match the bearer token
+    });
+    await req.user.save();
+    res.send("You have logged out");
+  } catch (error) {
+    res.status(400).send(error);
   }
 });
 
@@ -27,7 +54,6 @@ router.get("/users", async (req, res) => {
 router.get("/users/me", auth, async (req, res) => {
   res.send(req.user);
 });
-
 router.get("/users/:id", async (req, res) => {
   try {
     let user = await User.findById(req.params.id);
