@@ -44,9 +44,16 @@ testFunction(); */
 const Review = require("./models/review");
 const User = require("./models/user");
 
-const test = async () => {
-  const review = await Review.findById("5e33074c777a6e2004e49cc9");
-  await review.populate("owner").execPopulate();
-  console.log(review.owner);
+// const test = async () => {
+//   const review = await Review.findById("5e33074c777a6e2004e49cc9");
+//   await review.populate("owner").execPopulate();
+//   console.log(review.owner);
+// };
+// test();
+
+const main = async () => {
+  const user = await User.findById("5e3302ce0f6530304caf37aa");
+  await user.populate("reviews").execPopulate();
+  console.log(user.reviews);
 };
-test();
+main();

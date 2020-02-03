@@ -25,6 +25,16 @@ router.get("/reviews", async (req, res) => {
     res.status(500).send(error);
   }
 });
+
+router.get("/reviews/me", auth, async (req, res) => {
+  try {
+    await req.user.populate("reviews").execPopulate();
+    res.send(req.user.reviews);
+  } catch (error) {
+    res.send(error);
+  }
+});
+
 router.get("/reviews/:id", async (req, res) => {
   const movie = req.params.id;
   try {

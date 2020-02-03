@@ -54,6 +54,7 @@ router.get("/users", async (req, res) => {
 router.get("/users/me", auth, async (req, res) => {
   res.send(req.user);
 });
+
 router.get("/users/:id", async (req, res) => {
   try {
     let user = await User.findById(req.params.id);

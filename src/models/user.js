@@ -45,6 +45,11 @@ const userSchema = new mongoose.Schema({
     }
   ]
 });
+userSchema.virtual("reviews", {
+  ref: "Review",
+  localField: "_id",
+  foreignField: "owner"
+});
 
 userSchema.methods.toJSON = function() {
   const user = this;
