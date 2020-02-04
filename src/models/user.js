@@ -43,7 +43,10 @@ const userSchema = new mongoose.Schema({
         required: true
       }
     }
-  ]
+  ],
+  profilePic: {
+    type: Buffer
+  }
 });
 userSchema.virtual("reviews", {
   ref: "Review",
