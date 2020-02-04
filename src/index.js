@@ -57,3 +57,8 @@ const main = async () => {
   console.log(user.reviews);
 };
 main();
+
+
+
+// download npm i multer
+// try profile pic thing 

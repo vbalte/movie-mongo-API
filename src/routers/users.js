@@ -1,7 +1,9 @@
 const express = require("express");
 const User = require("../models/user");
 const auth = require("../middleware/auth");
+const multer  require("multer"); 
 const router = new express.Router();
+
 
 router.post("/users", async (req, res) => {
   try {
@@ -41,6 +43,20 @@ router.post("/users/logout", auth, async (req, res) => {
     res.status(400).send(error);
   }
 });
+const upload = multer({
+  dest: "profilePics"
+}); 
+router.post(
+"/users/me/profilePic",
+upload.single("profilePic"),
+async (req, res) => {
+  try {
+    res.status(200).send("Uploaded Profile Picture Success");
+  } catch (error) {
+    res.status(500).send(error); 
+  }
+}
+); 
 
 router.get("/users", async (req, res) => {
   try {
