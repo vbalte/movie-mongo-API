@@ -107,14 +107,30 @@ router.patch("/users/:id", auth, async (req, res) => {
 
 router.post(
   "/users/me/profilePic",
+  auth,
   upload.single("profilePic"),
   async (req, res) => {
     try {
+      req.user.profilePic = req.file.buffer;
+      await req.user.save();
       res.status(200).send("Uploaded Profile Picture Success");
     } catch (error) {
       res.status(500).send(error);
     }
   }
 );
+
+router.get("/users/:id/profilePic", async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    if (!user || !user.profilePic) {
+      throw new Error();
+    }
+    res.set("Content-Type", "image/jpg");
+    res.send(user.profilePic);
+  } catch (error) {
+    res.status(404).send(error);
+  }
+});
 
 module.exports = router;
